@@ -49,6 +49,15 @@ describe("Flip contract", function () {
         const betAndRakeAmount = ethers.parseEther("0.105");
         const { contract, owner, addr1 } = await loadFixture(deployFlipFixture);
 
+        //set vrf 
+        // setVRFCoordinatorInfoByMethod(FulfillmentMethod method, bytes32 gasLane, address coordAddress, uint64 subscriptionId, uint32 callbackGasLimit)
+        let setVRFCoordinatorInfoByMethodResult = await contract.setVRFCoordinatorInfoByMethod(0,
+            '0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c',
+            '0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625',
+            8091,
+            100000
+        );
+        console.log("setVRFCoordinatorInfoByMethodResult value", setVRFCoordinatorInfoByMethodResult);
         //deploy treasury
         const { treasury } = await loadFixture(deployTreasuryFixture)
         console.log("treasury:address", treasury.address, "target", treasury.target);

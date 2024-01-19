@@ -10,22 +10,22 @@ async function main() {
   
     // console.log("Deploying contracts with the account:", deployer.address);
 
-    // const RakeDistributor = await ethers.getContractFactory("RakeDistributor");
-    // const contract = await RakeDistributor.deploy(deployer.address);
-    // console.log("RakeDistributor contract deploy");
+    // const ReferralTracker = await ethers.getContractFactory("ReferralTracker");
+    // const contract = await ReferralTracker.deploy(deployer.address);
+    // console.log("ReferralTracker contract deploy");
     // console.log("Before Deploying contracts with the account:", contract.address , contract.target);
 
 
 
-    await sleep(45 * 1000);
+    // await sleep(45 * 1000);
     await hre.run("verify:verify", {
-        address:'0xF663fb7b3e7B8fd36A04683D19D851C52273D9A8',
+        address:'0x3e8B8D46513365938BbEB5f8c97dF72Ac02CbCAE',
         constructorArguments:['0x0A6dc8B39461374b388634745593f1c70CCb57a2'],
     });
-    // console.log("done")
+    console.log("done")
 }
-//0xF663fb7b3e7B8fd36A04683D19D851C52273D9A8
-//https://sepolia.etherscan.io/address/0xF663fb7b3e7B8fd36A04683D19D851C52273D9A8#code
+//0x3e8B8D46513365938BbEB5f8c97dF72Ac02CbCAE
+//https://sepolia.etherscan.io/address/0x3e8B8D46513365938BbEB5f8c97dF72Ac02CbCAE#code
 
 
 main()

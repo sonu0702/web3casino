@@ -2,7 +2,6 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "hardhat/console.sol";
 
 /// A contract to track referrals per wallet
 contract ReferralTracker is Ownable {
@@ -13,9 +12,6 @@ contract ReferralTracker is Ownable {
     address constant NO_REFERRER = address(1);
 
     modifier onlyOperator() {
-        console.log(
-            "msg.sender",msg.sender,"operators[msg.sender]",operators[msg.sender]
-        );
         require(operators[msg.sender] == true, "Must be operator!");
         _;
     }
@@ -88,29 +84,20 @@ contract ReferralTracker is Ownable {
         string memory code
     ) public view returns (address) {
         address referrer = referrerByWallet[gamer];
-        console.log(
-            "getReferrerFromGamerAndCode gamer %s code %s referer %s",
-            gamer,
-            code,
-            referrer
-        );
         // Non-referrals are for this contract only
         if (referrer == NO_REFERRER) {
             return address(0);
         }
-        console.log("referrer == NO_REFERRER done");
         // Normal referral return
         if (referrer != address(0)) {
             return referrer;
         }
-        console.log("referrer != address(0) done");
         referrer = getReferrerFromCode(code);
 
         // Self referral attempts are denied
         if (referrer == gamer) {
             return address(0);
         }
-        console.log("referrer === gamer , return referrer %s",referrer );
         // return the new referrer (will be set later)
         return referrer;
     }

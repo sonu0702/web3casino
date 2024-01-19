@@ -5,6 +5,7 @@ import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 //this import is differnt than one which is deployed by fredy
 import "@chainlink/contracts/src/v0.8/vrf/VRFConsumerBaseV2.sol";
 import "./MultipleVRFConsumerBase.sol";
+import "hardhat/console.sol";
 
 abstract contract GameVRF is MultipleVRFConsumerBase {
     enum FulfillmentMethod {
@@ -37,6 +38,8 @@ abstract contract GameVRF is MultipleVRFConsumerBase {
     function setVRFCoordinatorInfoByMethod(FulfillmentMethod method, bytes32 gasLane, address coordAddress, uint64 subscriptionId, uint32 callbackGasLimit) external onlyOwner {
         coordinatorInfoByMethod[method] = CoordinatorInfo(gasLane, coordAddress, subscriptionId, callbackGasLimit);
         setVRFCoordinator(coordAddress, true);
+        console.log("coordAddress %s, subscriptionId %d, callbackGasLimit %d",
+        coordAddress, subscriptionId, callbackGasLimit);
     }
 
     /// Requests VRF for a game and tracks the mapping from request to game.
